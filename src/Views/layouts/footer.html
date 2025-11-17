@@ -1,0 +1,83 @@
+
+<div id="toaster" class="fixed top-0 right-0 ma3 w5 z-9999"></div>
+
+
+<footer class="bg-near-black white pv4 ph3 ph5-m ph6-l">
+  <div class="mw8 center flex flex-column flex-row-ns justify-between">
+    
+    <!-- Brand / About -->
+    <div class="mb3 mb0-ns w-100 w-33-ns">
+      <h3 class="f4 fw6 mb2">{env var='APP_TITLE'}<sub class="gray-light f7">{env var='APP_VERSION'}</sub></h3>
+      <p class="f6 lh-copy">
+        Helping you find the right match with trust and simplicity.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="mb3 mb0-ns w-100 w-33-ns">
+      <h4 class="f5 fw6 mb2">Quick Links</h4>
+      <ul class="list pa0 ma0">
+               <li class="mb2"><a href="{$url}/about" class="link white dim">About Us</a></li>
+        <li class="mb2"><a href="{$url}/privacy" class="link white dim">Privacy Policy</a></li>
+        <li class="mb2"><a href="{$url}/terms" class="link white dim">Terms of use</a></li>
+        <li class="mb2"><a href="{$url}/contact" class="link white dim">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Social Media -->
+    <div class="w-100 w-33-ns">
+      <h4 class="f5 fw6 mb2">Follow Us</h4>
+      <div class="flex gap2 flex-column">
+        <a href="https://www.facebook.com/profile.php?id=61571844697954" class="link white dim" target="_blank">Facebook</a>
+        <a href="#" class="link white dim" target="_blank">Instagram</a>
+        <a href="https://x.com/myfreematrimony" class="link white dim" target="_blank">X</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Copyright -->
+  <div class="mt4 tc f6 white-70">
+    © {$smarty.now|date_format:"%Y"} {env var='APP_TITLE'}. All rights reserved.
+  </div>
+</footer>
+
+
+
+{include file="components/dialog-confirm.html"}
+
+{include file="components/ajax-spinner.html"}
+
+
+
+{nocache}
+
+<script>
+    window.appLocals = {
+        url: '{$url}',
+        ajax: '{$url}/ajax/',
+        isUserLoggedIn: {$isUserLoggedIn},
+        production:{$isProduction},
+        recaptchaSiteKey:"{env var='GOOGLE_CAPTCHA_SITE_KEY'}"
+       
+    };
+    
+
+</script>
+
+    {/nocache}
+
+<script src="{$url}/libs/lodash.min.js"></script>
+<script src="{$url}/libs/moment.min.js"></script>
+<script src="{$url}/libs/jquery.min.js"></script>
+<script src="{$url}/libs/owlcarousel/owl.carousel.min.js"></script>
+<script src="{$url}/libs/jquery-validation/jquery.validate.min.js"></script>
+<script src="{$url}/libs/jquery-validation/additional-methods.min.js"></script>
+<script src="{$url}/libs/vanillajs-datepicker/vanillajs-datepicker.full.min.js"></script>
+<script src="{$url}/libs/select2/js/select2.full.min.js"></script>
+
+
+{js file="scripts/app.js"}
+{js file="scripts/mediaquery.js"}
+
+{block name="scripts"}{/block}

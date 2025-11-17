@@ -1,0 +1,44 @@
+<header>
+  <nav class="primary-navbar pv2 bg-white shadow-2 relative">
+    <!-- Toggle button for mobile/tablet -->
+    <div class="container">
+      <div class="flex items-center justify-between">
+        <button class="menu-toggle dn" id="menuToggle">&#9776;</button>
+
+        <!-- Site Name -->
+        <a class="site-name font-montserrat f3-m f4 fw6 link near-black" href="{$url}">{env var='APP_TITLE'}</a>
+
+        <!-- Nav Links -->
+        <ul class="nav-links list pa0 open items-center">
+
+          <li class="mr3"><a href="{$url}" class="link black">Home</a></li>
+          {nocache}
+          {if $isUserLoggedIn}
+
+          <li class="mr3"><a href="{$url}/dashboard" class="link black">Dashboard</a></li>
+          {/if}
+
+          <li class="mr3"><a href="{$url}/search" class="link black">Search</a></li>
+          <li class="mr3"><a href="{$url}/search/advanced" class="link black">Advanced</a></li>
+
+          {if !$isUserLoggedIn}
+          <li><a href="{$url}/login" class="link black">Login</a></li>
+          {/if}
+          {if $isUserLoggedIn}
+          
+
+          <li class="mr3"><a href="{$url}/profiles/my" class="link black">My Profiles</a></li>
+          <li class="mr3"><a href="{$url}/user/shortlisted" class="link black">Shortlisted</a></li>
+           <li class="mr3"><a href="{$url}/user/transactions" class="link black">Transactions</a></li>
+          <li><a href="javascript:void(0)" class="link black logout">Logout</a></li>
+          {/if}
+          {/nocache}
+
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+</header>
+<div  class="nav-backdrop fixed top-0 left-0 w-100 h-100 bg-black-50 dn"></div>

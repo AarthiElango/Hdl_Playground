@@ -1,0 +1,29 @@
+<form class="login guest mw6 center pa4 br3 shadow-5 bg-white">
+  <fieldset>
+    <h2 class="tc font-pacifico f2 mb4">Welcome Back</h2>
+    <p class="tc near-black">Access your account to continue exploring.</p>
+    <div class="mb3">
+      <label class="db mb1 font-montserrat f6" for="username">Email/Mobile</label>
+      <input class="input-reset ba b--black-20 pa3 w-100 font-poppins" type="text" id="username" name="username"
+        placeholder="you@example.com" required autocomplete="username">
+    </div>
+
+    <div class="mb4 relative">
+      <label class="db mb1 font-montserrat f6" for="password">Password</label>
+      <input class="input-reset ba b--black-20 pa3 w-100 font-poppins" type="password" id="password" name="password"
+        placeholder="********" required autocomplete="current-password">
+        {include file="components/password-toggler.html"}
+    </div>
+
+    <button class="w-100 pa3 bg-green white b--green br2 font-montserrat hover-bg-dark-green">Login</button>
+
+  <div class="mt3 tc f6 font-poppins flex flex-column items-center">
+  <button type="button" data-form="forgot-password" class="bg-transparent b--none pa2 link dim black-70 pointer">
+    Forgot Password?
+  </button>
+  <button type="button" data-form="register" class="bg-transparent b--none pa2 link dim black-70 pointer">
+    Don't have an account? Register
+  </button>
+</div>
+  </fieldset>
+</form>

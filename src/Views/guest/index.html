@@ -1,0 +1,22 @@
+{extends file='layouts/base.html'} 
+
+
+{block name="content"}
+
+{include file="guest/login.html"}
+{include file="guest/forgot-password.html"}
+{include file="guest/register.html"}
+{include file="guest/set-password.html"}
+
+{/block} 
+
+
+{block name="scripts"}
+
+{js file="scripts/guest/index.js"}
+{js file="scripts/guest/login.js"}
+{js file="scripts/guest/register.js"}
+{js file="scripts/guest/forgot-password.js"}
+{js file="scripts/guest/set-password.js"}
+
+{/block}
