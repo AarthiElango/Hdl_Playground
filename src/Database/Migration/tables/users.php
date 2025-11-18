@@ -50,6 +50,10 @@
                 "DATETIME",
                 "NULL"
             ],
+            'github_token'=>[
+                'TEXT',
+                'NULL'
+            ],
             'created_at' => [
                 "TIMESTAMP",
                 "DEFAULT CURRENT_TIMESTAMP"
