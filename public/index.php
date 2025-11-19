@@ -27,7 +27,7 @@ $app->options('/{routes:.+}', function ($request, $response, $args) {
 });
 
 $app->add(new CorsMiddleware());
-$app->add(new RateLimitMiddleware());
+// $app->add(new RateLimitMiddleware());
 
 $app->addBodyParsingMiddleware();
 

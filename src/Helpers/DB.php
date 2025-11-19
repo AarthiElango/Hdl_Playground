@@ -13,43 +13,18 @@ class DB
     {
 
         $this->db = new MedooDB([
-            // [required]
-            'type'     => 'mysql',
-            'host'     => 'localhost',
-            'database' => $_ENV['DB_DATABASE'],
-            'username' => $_ENV['DB_USERNAME'],
-            'password' => $_ENV['DB_PASSWORD'],
+    // [required]
+    'type'     => 'mysql',
+    'host'     => $_ENV['DB_HOST'] ?? 'localhost',
+    'database' => $_ENV['DB_NAME'] ?? '',           // Changed from DB_DATABASE
+    'username' => $_ENV['DB_USER'] ?? '',           // Changed from DB_USERNAME
+    'password' => $_ENV['DB_PASS'] ?? '',           // Changed from DB_PASSWORD
 
-            // [optional]
-            // 'charset' => 'utf8mb4',
-            // 'collation' => 'utf8mb4_general_ci',
-            'port'     => $_ENV['DB_PORT'],
-
-            // [optional] The table prefix. All table names will be prefixed as PREFIX_table.
-            'prefix'   => $_ENV['DB_PREFIX'],
-
-            // [optional] To enable logging. It is disabled by default for better performance.
-            'logging'  => $_ENV['DB_LOGGING'],
-
-            // [optional]
-            // Error mode
-            // Error handling strategies when the error has occurred.
-            // PDO::ERRMODE_SILENT (default) | PDO::ERRMODE_WARNING | PDO::ERRMODE_EXCEPTION
-            // Read more from https://www.php.net/manual/en/pdo.error-handling.php.
-            // 'error' => PDO::ERRMODE_SILENT,
-
-            // [optional]
-            // The driver_option for connection.
-            // Read more from http://www.php.net/manual/en/pdo.setattribute.php.
-            // 'option' => [
-            //     PDO::ATTR_CASE => PDO::CASE_NATURAL
-            // ],
-
-            // [optional] Medoo will execute those commands after the database is connected.
-            // 'command' => [
-            //     'SET SQL_MODE=ANSI_QUOTES'
-            // ]
-        ]);
+    // [optional]
+    'port'     => $_ENV['DB_PORT'] ?? 3306,
+    'prefix'   => $_ENV['DB_PREFIX'] ?? '',
+    'logging'  => filter_var($_ENV['DB_LOGGING'] ?? false, FILTER_VALIDATE_BOOLEAN),
+]);
         $timezone = $_ENV['MYSQL_TIMEZONE'];
         $this->db->pdo->exec("SET time_zone = '$timezone'");
     }
