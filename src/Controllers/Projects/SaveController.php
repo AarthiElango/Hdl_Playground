@@ -16,9 +16,9 @@ class SaveController extends Controller
         $rules     = [
             'title'       => 'required|min:3|max:200',
             'description' => 'nullable|min:3|max:500',
-            'template_id'    => 'required|numeric',
-            'tool_id'    => 'required|numeric',
-            'files'    => 'required|array',
+            'template_id' => 'required|numeric',
+            'tool_id'     => 'required|numeric',
+            'files'       => 'required|array',
         ];
         $messages = [
 
@@ -62,9 +62,9 @@ class SaveController extends Controller
             'title'       => $validData->title,
             'description' => $validData->description,
             'template_id' => $validData->template_id,
-            'tool_id' => $validData->tool_id,
+            'tool_id'     => $validData->tool_id,
             'user_id'     => $uid,
-            'files'    => serialize($validData->files),
+            'files'       => serialize($validData->files),
         ];
 
         $this->db->insert('projects', $args);
@@ -79,11 +79,11 @@ class SaveController extends Controller
         $validator = new \App\Helpers\Validator();
         $data      = $request->getParsedBody();
         $rules     = [
-            'files'    => 'nullable|array',
+            'files'       => 'nullable|array',
             'title'       => 'nullable|string',
             'description' => 'nullable|string',
             'template_id' => 'nullable|numeric',
-            'tool_id' => 'nullable|numeric',
+            'tool_id'     => 'nullable|numeric',
         ];
         $messages = [
 
@@ -112,27 +112,27 @@ class SaveController extends Controller
 
         $args = [];
 
-        if(!empty($validData->files)){
+        if (! empty($validData->files)) {
 
             $args['files'] = serialize($validData->files);
         }
 
-          if(!empty($validData->title)){
+        if (! empty($validData->title)) {
 
             $args['title'] = $validData->title;
         }
 
-          if(!empty($validData->description)){
+        if (! empty($validData->description)) {
 
             $args['description'] = $validData->description;
         }
 
-           if(!empty($validData->template_id)){
+        if (! empty($validData->template_id)) {
 
             $args['template_id'] = $validData->template_id;
         }
 
-           if(!empty($validData->tool_id)){
+        if (! empty($validData->tool_id)) {
 
             $args['tool_id'] = $validData->tool_id;
         }
