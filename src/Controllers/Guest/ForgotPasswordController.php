@@ -44,7 +44,7 @@ class ForgotPasswordController extends Controller
                 'username' => $validData->username,
             ],
         ];
-        $user = (object) $this->db->get('users', ['id', 'username' ,'otp_created_at'], $where);
+        $user = (object) $this->db->get('users', ['id', 'fullname', 'email', 'username' ,'otp_created_at'], $where);
 
         if (empty($user) || empty($user->id)) {
 
@@ -86,21 +86,24 @@ class ForgotPasswordController extends Controller
 
         $res = ['message' => 'OTP generated successful','username' => $user->username];
 
-        if ($ENV === 'production') {
+        $res['env'] = $ENV;
 
-            $sms = new \App\Helpers\FastSms;
-
-            $sent = $sms->send($uid);
-
-            if (! $sent) {
-
-                return $this->json(['error' => 'Error sending sms in OTP. Contact administrator'], 422);
-            }
+       if ($ENV !== 'production') {
+            $res['otp'] = $otp;
 
             return $this->json($res);
-        }
 
-        $res['otp'] = $otp;
+        }
+        $args = [
+            'from'                  => 'HDL Playground <postmaster@silicon-craft.com>',
+            'to'                    => $user->email,
+            'template'              => 'otp for hdlplayground',
+            'h:X-Mailgun-Variables' => '{"otp": ' . $otp . ',"name":"' . $user->fullname . '"}',
+        ];
+
+        $mail = new \App\Helpers\Mailgun;
+
+        $mail->send($args);
 
         return $this->json($res);
 

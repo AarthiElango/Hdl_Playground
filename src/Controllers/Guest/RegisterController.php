@@ -24,7 +24,7 @@ class RegisterController extends Controller
         $data      = $request->getParsedBody();
         $rules     = [
             'email'    => 'required|email|unique:users,email',
-            'username'    => 'required|unique:users,username|regex:/^[0-9a-z]*$/',
+            'username' => 'required|unique:users,username|regex:/^[0-9a-z]*$/',
             'mobile'   => 'required|regex:/^[6-9][0-9]{9}$/|unique:users,mobile',
             'fullname' => 'required|min:3|max:30',
         ];
@@ -43,7 +43,7 @@ class RegisterController extends Controller
         $dbhelper = new \App\Helpers\DB;
 
         $args = [
-            'username'           => $validData->username,
+            'username'       => $validData->username,
             'password'       => password_hash($random->string(), PASSWORD_DEFAULT),
             'fullname'       => $validData->fullname,
             'email'          => $validData->email,
@@ -65,23 +65,22 @@ class RegisterController extends Controller
 
         $res = ['message' => 'User registration successful', 'username' => $validData->username];
 
-        if ($ENV === 'production') {
-
-            $sms = new \App\Helpers\FastSms;
-
-            $uid = $this->db->id();
-
-            $sent = $sms->send($uid);
-
-            if (! $sent) {
-
-                return $this->json(['error' => 'Error sending sms in OTP. Contact administrator'], 422);
-            }
+        if ($ENV !== 'production') {
+            $res['otp'] = $otp;
 
             return $this->json($res);
-        }
 
-        $res['otp'] = $otp;
+        }
+        $args = [
+            'from'                  => 'HDL Playground <postmaster@silicon-craft.com>',
+            'to'                    => $validData->email,
+            'template'              => 'otp for hdlplayground',
+            'h:X-Mailgun-Variables' => '{"otp": ' . $otp . ',"name":"' . $validData->fullname . '"}',
+        ];
+
+        $mail = new \App\Helpers\Mailgun;
+
+        $mail->send($args);
 
         return $this->json($res);
 

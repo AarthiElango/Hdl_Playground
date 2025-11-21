@@ -15,7 +15,7 @@ class SaveController extends Controller
         $data      = $request->getParsedBody();
         $rules     = [
             'title'       => 'required|min:3|max:200',
-            'description' => 'required|min:3|max:500',
+            'description' => 'nullable|min:3|max:500',
             'template_id'    => 'required|numeric',
             'tool_id'    => 'required|numeric',
             'files'    => 'required|array',
