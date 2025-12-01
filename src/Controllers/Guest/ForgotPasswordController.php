@@ -84,11 +84,12 @@ class ForgotPasswordController extends Controller
 
         $ENV = get($_ENV, 'APP_ENV', 'production');
 
-        $res = ['message' => 'OTP generated successful','username' => $user->username];
+        $res = ['message' => 'Your OTP has been generated and sent to your registered email address. Please check your inbox to proceed.','username' => $user->username];
 
         $res['env'] = $ENV;
 
        if ($ENV !== 'production') {
+
             $res['otp'] = $otp;
 
             return $this->json($res);

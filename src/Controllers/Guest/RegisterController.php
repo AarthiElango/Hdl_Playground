@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'fullname' => 'required|min:3|max:30',
         ];
         $messages = [
-
+            'username:regex' => 'Username can contain only lowercase letters and numbers'
         ];
         $validationResult = $validator->make($data, $rules, $messages);
         if ($validationResult !== true) {
@@ -63,7 +63,7 @@ class RegisterController extends Controller
 
         $ENV = get($_ENV, 'APP_ENV', 'production');
 
-        $res = ['message' => 'User registration successful', 'username' => $validData->username];
+        $res = ['message' => 'Your OTP has been generated and sent to your registered email address. Please check your inbox to proceed.', 'username' => $validData->username];
 
         if ($ENV !== 'production') {
             $res['otp'] = $otp;
